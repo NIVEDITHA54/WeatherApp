@@ -36,7 +36,7 @@ const Form = () => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
         // class='error'
-        style={{ color: "black", fontSize: "20px", fontWeight: "600" }}
+        style={{ color: "#750404", fontSize: "20px", fontWeight: "500" }}
       >
         <Modal.Header closeButton>Please Note!</Modal.Header>
         <Modal.Body>
