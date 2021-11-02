@@ -1,41 +1,34 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { fetchingActions, weatherActions } from "../redux/index";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getWeatherByCity } from "../redux/weatherSlice";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import getWeatherData from "../redux/actions";
+import { locationActions } from "../redux/index";
 
 const Form = () => {
   let error = "City and Country cannot be left blank";
   const dispatch = useDispatch();
+  const location = useSelector((state) => state.location.location);
 
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
   const [showError, setShowError] = useState(false);
 
-  const handleChange = (event) => {
-    if (event.target.id === "city") {
-      setCity(event.target.value);
-    } else if (event.target.id === "country") {
-      setCountry(event.target.value);
-    } else {
-      return;
-    }
-  };
+  useEffect(() => {
+    dispatch(getWeatherByCity(location));
+  }, [dispatch, location]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (city === "" || country === "") {
       setShowError(true);
     } else {
-      dispatch(fetchingActions.setFetching(true));
-      getWeatherData(city, country, "location");
+      dispatch(locationActions.setLocation({ city, country }));
     }
     e.target.reset();
   };
 
   const ErrorModal = (props) => {
-    dispatch(weatherActions.clearWeatherData);
     return (
       <Modal
         {...props}
@@ -43,9 +36,9 @@ const Form = () => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
         // class='error'
-        style={{ color: "#eb722c", fontSize: "20px" }}
+        style={{ color: "black", fontSize: "20px", fontWeight: "600" }}
       >
-        <Modal.Header closeButton>Oops!</Modal.Header>
+        <Modal.Header closeButton>Please Note!</Modal.Header>
         <Modal.Body>
           <p>{error}</p>
         </Modal.Body>
@@ -57,22 +50,34 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={(e) => handleSubmit(e)} class="country-city">
-      <input
-        type="text"
-        id="city"
-        name="city"
-        placeholder="City..."
-        onChange={handleChange}
-      />
-      <input
-        type="text"
-        id="country"
-        name="country"
-        placeholder="Country..."
-        onChange={handleChange}
-      />
-      <button id="get-weather">Get Weather</button>
+    <form onSubmit={(e) => handleSubmit(e)}>
+      <div className="row p-5 justify-content-center">
+        <div className="col-sm-4">
+          <input
+            type="text"
+            className="form-control"
+            id="city"
+            name="city"
+            placeholder="City"
+            onChange={(event) => setCity(event.target.value)}
+          />
+        </div>
+        <div className="col-sm-4">
+          <input
+            type="text"
+            className="form-control"
+            id="country"
+            name="country"
+            placeholder="Country"
+            onChange={(event) => setCountry(event.target.value)}
+          />
+        </div>
+      </div>
+      <div className="row justify-content-center">
+        <div className="col-sm-4">
+          <button id="get-weather">Get Weather</button>
+        </div>
+      </div>
       <ErrorModal show={showError} onHide={() => setShowError(false)} />
     </form>
   );

@@ -4,20 +4,17 @@ const locationSlice = createSlice({
   name: "location",
   initialState: {
     location: null,
-    selectedLocation: {
-      city: null,
-      country: null,
-    },
+    position: null,
   },
   reducers: {
-    setCurrentLocation(state, action) {
+    setLocation(state, action) {
       state.location = action.payload;
     },
-    selectLocation(state, action) {
-      state.selectedLocation = action.payload;
-    },
     clearLocation(state) {
-      state.selectedLocation = state;
+      state.location = state;
+    },
+    setPosition(state, action) {
+      state.position = action.payload;
     },
   },
 });

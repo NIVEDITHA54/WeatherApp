@@ -1,17 +1,14 @@
 import React from "react";
 import "./App.css";
 import HomePage from "./components/HomePage.js";
+
 function App() {
   return (
-    <div>
-      <div className="wrapper">
-        <div className="main">
-          <div className="container">
-            <HomePage />
-          </div>
-        </div>
+    <>
+      <div className="main-image">
+        <HomePage />
       </div>
-    </div>
+    </>
   );
 }
 

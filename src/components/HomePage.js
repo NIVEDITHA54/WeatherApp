@@ -1,44 +1,48 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import CityCountryForm from "./CityCountryForm.js";
-import CurrentLocationButton from "./CurrentLocationButton.js";
 import WeatherContainer from "./WeatherContainer.js";
+import CurrentLocationButton from "./CurrentLocationButton";
 
 const HomePage = () => {
   const currentLocation = useSelector((state) => state.location.location);
-  const weatherData = useSelector((state) => state.weather.weather);
-
+  const weatherData = useSelector((state) => state.weather.weatherData);
+  const status = useSelector((state) => state.weather.status);
+  console.log(
+    "currentLocation = ",
+    currentLocation,
+    "  weatherData = ",
+    weatherData,
+    " status = ",
+    status
+  );
   return (
-    <div className="row">
-      <div className="col-md-6 title"></div>
-      <div className="col-md-6 form">
+    <>
+      <div className="container">
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-6 title mt-5">
+            <h1> Weather App</h1>
+          </div>
+        </div>
+        <div className="row justify-content-center">
+          <div className="col-12">
             <CityCountryForm />
           </div>
         </div>
-
-        <div className="row">
-          <div className="col-md-4"></div>
-          <div className="col-md-4">
+        <div className="row justify-content-center mt-3">
+          <div className="col-sm-4">
             <CurrentLocationButton />
           </div>
-          <div className="col-md-4"></div>
         </div>
-
-        <br></br>
-
-        <div className="row">
-          <div className="col-md-1"></div>
-          <div className="col-md-10">
-            {currentLocation !== null && weatherData !== null && (
+        <div className="row justify-content-center">
+          <div className="col-4">
+            {weatherData !== null && status === "success" && (
               <WeatherContainer />
             )}
           </div>
-          <div className="col-md-1"></div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

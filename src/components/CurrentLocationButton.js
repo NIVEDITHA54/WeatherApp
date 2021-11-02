@@ -1,29 +1,22 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { locationActions, fetchingActions } from "../redux/index";
-import getWeatherData from "../redux/actions";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getWeatherByCoordinates } from "../redux/weatherSlice";
+import { locationActions } from "../redux/index";
 
 const CurrentLocationButton = () => {
   const dispatch = useDispatch();
+  const position = useSelector((state) => state.location.position);
+
+  useEffect(() => {
+    dispatch(getWeatherByCoordinates(position));
+  }, [dispatch, position]);
 
   const handleClick = () => {
-    dispatch(fetchingActions.setFetching(true));
-    getCurrentLocationData();
-  };
-
-  const getCurrentLocationData = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         let latitude = position.coords.latitude;
         let longitude = position.coords.longitude;
-
-        // setLocation and getWeatherData go to Redux
-        dispatch(
-          locationActions.setCurrentLocation({
-            position: { latitude, longitude },
-          })
-        );
-        dispatch(getWeatherData(latitude, longitude, "coordinates"));
+        dispatch(locationActions.setPosition({ latitude, longitude }));
       });
     }
   };
