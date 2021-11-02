@@ -20,7 +20,7 @@ const HomePage = () => {
     <>
       <div className="container">
         <div className="row">
-          <div className="col-6 title mt-5">
+          <div className="col-8 col-sm-6 title mt-5">
             <h1> Weather App</h1>
           </div>
         </div>
@@ -30,12 +30,12 @@ const HomePage = () => {
           </div>
         </div>
         <div className="row justify-content-center mt-3">
-          <div className="col-sm-4">
+          <div className="col-6 col-sm-4">
             <CurrentLocationButton />
           </div>
         </div>
         <div className="row justify-content-center">
-          <div className="col-4">
+          <div className="col-10 col-sm-4">
             {weatherData !== null && status === "success" && (
               <WeatherContainer />
             )}

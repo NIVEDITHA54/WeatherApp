@@ -38,31 +38,20 @@ body {
 
 .main-image {
   width: 100%;
-  height: 120vh;
+  height: 100vh;
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url("img/image3.jpg") top right;
   background-size: cover;
 }
 
-#subtitle {
-  font-style: italic;
-  font-weight: 100;
-  letter-spacing: 1px;
-  line-height: 1.5;
-  font-family: "Merriweather", serif;
+@media only screen and (max-width: 600px) {
+  #weather-data {
+    padding: 25px 25px;
+  }
+  .main-image {
+    height: 160vh;
+  }
 }
-
-.form {
-  background: linear-gradient(to top, #1b70b9, #04023a);
-  height: 90vh;
-  padding-top: 60px;
-  padding-left: 50px;
-}
-
-/* input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 50px white inset;
-    -webkit-text-fill-color: white;
-} */
 
 button {
   border: 0;
@@ -78,47 +67,4 @@ button {
   border-radius: 16px;
   color: white;
   font-weight: 400;
-}
-
-.weather__info {
-  width: 60%;
-  font-size: 20px;
-  font-weight: 200;
-  letter-spacing: 2px;
-}
-
-.weather__key {
-  color: #eb722c;
-  border-bottom: solid 2px rgba(255, 255, 255, 0.06);
-  padding: 20px 0 20px 0;
-  font-weight: 400;
-}
-
-.weather__key:last-child {
-  border: 0;
-}
-
-.weather__value {
-  color: #fff;
-  font-weight: 200;
-}
-
-.weather__error {
-  color: #eb722c;
-  font-size: 20px;
-  letter-spacing: 1px;
-  font-weight: 200;
-}
-
-p#location {
-  font-size: 25px;
-  text-align: center;
-}
-
-.error {
-  color: #eb722c;
-  font-size: 20px;
-  text-align: center;
-  /* letter-spacing: 1px; */
-  /* font-weight: 200; */
 }

@@ -74,7 +74,7 @@ const Form = () => {
         </div>
       </div>
       <div className="row justify-content-center">
-        <div className="col-sm-4">
+        <div className="col-6 col-sm-4">
           <button id="get-weather">Get Weather</button>
         </div>
       </div>
